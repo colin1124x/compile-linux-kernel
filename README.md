@@ -21,6 +21,8 @@
     - audit-libs-devel
     - pciutils-devel
     - pesign
+-make menuconfig 時用作繪畫文字視窗的程式庫
+    - ncurses-devel
     
 ## 編譯步驟
 
@@ -55,3 +57,4 @@ $ sudo rpm -e kernel-xxxx
 -------------------------------
 #### 參考出處
 [http://darkranger.no-ip.org/content/how-to:linux-重編系統核心](http://darkranger.no-ip.org/content/how-to%EF%BC%9Alinux-%E9%87%8D%E7%B7%A8%E7%B3%BB%E7%B5%B1%E6%A0%B8%E5%BF%83)
+[編譯 Linux 核心](http://wiki.debian.org.hk/w/Compile_Linux_kernel)

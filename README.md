@@ -21,7 +21,7 @@
     - audit-libs-devel
     - pciutils-devel
     - pesign
--make menuconfig 時用作繪畫文字視窗的程式庫
+- make menuconfig 時用作繪畫文字視窗的程式庫
     - ncurses-devel
     
 ## 編譯步驟

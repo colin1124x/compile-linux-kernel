@@ -7,11 +7,11 @@
 ## 編譯工具
 
 - `hmaccalc` 用來處理 HMAC (hash-based message authentication code) [git](https://git.fedorahosted.org/cgit/hmaccalc.git)
-- `xmlto` xmlto 主要用途是用任何手段將XML檔轉換成另外一種目的格式 [source](https://fedorahosted.org/xmlto/browser)
-- `asciidoc`
-- `elfutils-devel`
-- `perl-ExtUtils-Embed`
-- `gcc`
+- `xmlto` 主要用途是用任何手段將XML檔轉換成另外一種目的格式 [source](https://fedorahosted.org/xmlto/browser)
+- `asciidoc` 用來寫文件,如man page
+- `elfutils-devel` [git](http://git.fedorahosted.org/git/elfutils.git)
+- `perl-ExtUtils-Embed` 將perl 嵌入 C/C++ 應用程序 [source](http://files1.directadmin.com/services/all/perl_modules/)1997年後沒任何修改
+- `gcc` 
 - `rpm-build`
     - `zlib-devel`
     - binutils-devel

@@ -17,9 +17,9 @@
     - `binutils-devel`
     - `newt-devel`
     - `python-devel`
-    - `bison`
+    - `bison` 上下文無關語法剖析器
     - `audit-libs-devel`
-    - `pciutils-devel`
+    - `pciutils-devel` 處理PCI
     - `pesign` make menuconfig 時用作繪畫文字視窗的程式庫
     - `ncurses-devel`
     

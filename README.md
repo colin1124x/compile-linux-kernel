@@ -43,10 +43,12 @@ $ sudo useradd mockbuild
 # -v Print verbose information
 # -h|--hash 用50個#作為解壓縮進度顯示
 $ rpm -ivh kernel-xxxx.src.rpm
+# 此步驟將產生 rpmbuild/SOURCES rpmbuild/SPECS
 
 # -b if a spec file is being used to build the package
 # -bp Executes the "%prep" stage from the spec file. Normally this involves unpacking the sources and applying any patches.
 $ rpmbuild -bp rpmbuild/SPECS/kernel.spec
+# 此步驟將產生 rpmbuild/BUILD rpmbuild/BUILDROOT rpmbuild/RPMS rpmbuild/SRPMS
 ```
 
 核心設定與編譯

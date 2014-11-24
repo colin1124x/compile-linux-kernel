@@ -6,6 +6,8 @@
 
 ## 編譯工具
 
+使用 yum install package.name 安裝
+
 - `hmaccalc` 用來處理 HMAC (hash-based message authentication code)
 - `xmlto` 主要用途是用任何手段將XML檔轉換成另外一種目的格式
 - `asciidoc` 用來寫文件,如man page
@@ -20,8 +22,8 @@
     - `bison` 上下文無關語法剖析器
     - `audit-libs-devel`
     - `pciutils-devel` 處理PCI
-    - `pesign` make menuconfig 時用作繪畫文字視窗的程式庫
     - `ncurses-devel`
+    - `pesign` make menuconfig 時用作繪畫文字視窗的程式庫
     
 ## 編譯步驟
 
@@ -31,12 +33,20 @@ $ yumdownloader --source kernel
 ```
 
 ```sh
-$ rpm -ivh kernel-xxxx.src.rpm
+$ sudo yum install mock
+$ sudo useradd mockbuild
 ```
 
 解壓縮與套用更新檔
 ```sh
-$ rpmbuild -bp rpmbuild/SPECS.kernel.spec
+# -i|--install
+# -v Print verbose information
+# -h|--hash 用50個#作為解壓縮進度顯示
+$ rpm -ivh kernel-xxxx.src.rpm
+
+# -b if a spec file is being used to build the package
+# -bp Executes the "%prep" stage from the spec file. Normally this involves unpacking the sources and applying any patches.
+$ rpmbuild -bp rpmbuild/SPECS/kernel.spec
 ```
 
 核心設定與編譯

@@ -1,0 +1,6 @@
+- Timer tick handling (Idle dynticks system (tickless idle))  --->
+    - 內核時鐘滴答處理程序
+- Old Idle dynticks config
+    - 同等於CONFIG_NO_HZ_IDLE,臨時用來兼容老版本內核選項,未來會被刪除
+- High Resolution Timer Support
+    - 高精度定時器(hrtimer)是從2.6.16開始引入,用於取代傳統timer wheel(基於jiffies定時器)的時鐘子系統.可以降低與內核其他模塊的耦合性,還可以提供比1毫秒更高的精度(因為它可以讀取HPET/TSC等新型硬件時鐘源),可以更好的支持音視頻等對時間精度要求較高的應用

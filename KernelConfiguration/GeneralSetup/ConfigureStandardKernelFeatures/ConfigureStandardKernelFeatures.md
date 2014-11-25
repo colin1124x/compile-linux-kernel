@@ -1,0 +1,4 @@
+- Load all symbols for debugging/ksymoops
+    - 裝載所有的調試符號表信息,會增大內核體積,僅供調試時選擇
+    - Include all symbols in kallsyms
+        - 在/proc/kallsyms中包含內核知道的所有符號,內核將會增大300K,僅在你確實需要的時候再開啟

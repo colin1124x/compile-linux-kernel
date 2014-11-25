@@ -1,0 +1,20 @@
+-   內核編譯選項
+    -   64-bit kernel: 編譯64位內核
+    -   General setup: 一般設定
+    -   Provide system-wide ring of trusted keys
+    -   Provide system-wide ring of blacklisted keys
+    -   Enable loadable module support: 可加載模組支援
+    -   Enable the block layer: 支援block device，如硬碟等
+    -   Processor type and features: CPU類型及功能
+    -   Power management and ACPI options: 電源管理及高階配置電源管理介面選項
+    -   Bus options (PCI etc.): 匯流排選項
+    -   Executable file formats / Emulations: 可執行檔案格式/模仿
+    -   Networking support: 網路支援
+    -   Device Drivers: 設備驅動程式
+    -   Firmware Drivers: 韌體驅動
+    -   File systems: 檔案系統
+    -   Kernel hacking: 內核hack選項
+    -   Security options: 安全選項
+    -   Cryptographic API: 內核加密
+    -   Virtualization: 虛擬化
+    -   Library routines: 庫函數

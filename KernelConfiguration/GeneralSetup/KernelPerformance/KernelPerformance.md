@@ -1,0 +1,2 @@
+- Debug: use vmalloc to back perf mmap() buffers
+    - 主要用於調試vmalloc代碼

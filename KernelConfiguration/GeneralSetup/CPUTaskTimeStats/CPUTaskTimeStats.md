@@ -1,0 +1,13 @@
+- Cputime accounting (Fine granularity task level IRQ time accounting)  --->
+- BSD Process Accounting
+    - 用戶空間程序可以要求內核將進程的統計信息寫入一個指定的文件,主要包括進程的創建時間/創建者/內存占用等信息
+    - BSD Process Accounting version 3 file format
+        - 使用新的v3版文件格式,可以包含每個進程的PID和其父進程的PID,但是不兼容老版本的文件格式
+- Export task/process statistics through netlink
+    - 通過netlink接口向用戶空間導出進程的統計信息,與 BSD Process Accounting 的不同之處在於這些統計信息在整個進程生存期都是可用的
+    - Enable per-task delay accounting
+        - 在統計信息中包含進程等候系統資源(cpu,IO同步,內存交換等)所花費的時間
+    - Enable extended accounting over taskstats
+        - 在統計信息中包含進程的更多擴展信息
+        - Enable per-task storage I/O accounting
+            - 在統計信息中包含進程在存儲設備上的I/O字節數

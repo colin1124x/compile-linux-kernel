@@ -1,0 +1,2 @@
+- Expose hardware/virtual IRQ mapping via debugfs
+    - asks if the IRQ numbers of the hardware and the respective can be mapped using a virtual debugging filesystem. This is for debugging purposes.

@@ -1,0 +1,6 @@
+- SLAB
+    - 久經考驗的slab內存分配器,在大多數情況下都具有良好的適應性
+- SLUB (Unqueued Allocator)
+    - SLUB與SLAB兼容,但通過取消大量的隊列和相關開銷,簡化了slab的結構.特別是在多核時擁有比​​slab更好的性能和更好的系統可伸縮性
+- SLOB (Simple Allocator)
+    - SLOB針對小型系統設計,做了非常激進的簡化,以適用於內存非常有限(小於64M)的嵌入式環境

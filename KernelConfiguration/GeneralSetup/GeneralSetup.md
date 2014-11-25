@@ -1,0 +1,87 @@
+- Cross-compiler tool prefix
+    - 交叉編譯工具之前綴，如需加入編譯工具，可選擇此項後，輸入工具前綴
+- Compile also drivers which will not load
+    - 編譯不會載入的驅動程式，通常給開發人員測試用，一般用戶不需勾選
+- Local version - append to kernel release
+    - 自訂版本號，uname -r可看到的版本
+- Automatically append version information to the version string
+    - 自動在版本字符串(CONFIG_LOCALVERSION)後面添加版本訊息
+- Kernel compression mode
+    - 內核Image壓縮模式，預設為Gzip
+- Default hostname
+    - 預設主機名稱,預設值為none
+- Support for paging of anonymous memory (swap)
+    - 支援swap，使用交換分區或者交換文來做為虛擬內存
+- System V IPC
+    - System V 進程間通信機制，用於進程間同步和交換數據，許多程序需要這個功能，通常選擇
+- POSIX Message Queues
+    - POSIX標準的訊息佇列，是POSIX IPC的一部分,如果你想編譯和運行那些使用"mq_*"系統調用的程序(比如為Solaris開發的程序),就必須開啟此選項
+- open by fhandle syscalls
+    - 用戶程序可以使用句柄(而非文件名)來追蹤文件(使用open_by_handle_at(2)/name_to_handle_at(2)系統調用),即使某文件被重命名,用戶程序依然可定位那個文件.此特性有助於實現用戶空間文件服務器(userspace file server).建議選擇,因為systemd和udev依賴於它.
+- Auditing support
+    - 記錄檔案所有的操作及修改，只有在需要高度安全性的系統才需要選擇此項；選擇此選項將會使系統變慢，一般情況不需選擇，安裝SELinux( Security Enhanced Linux)需選擇
+    - Enable system-call auditing support
+        - 對系統調用進行審計
+    - Make audit loginuid immutable
+        - 審計時使用固定的loginuid(LOGIN User ID)
+- IRQ subsystem
+    - IRQ(中斷請求)子系統，一般不需選擇
+    - An Interrupt ReQuest (or IRQ) is a signal from the hardware to the processor to temporarily stop a running program and allow a special program to execute in its place.
+- Timers subsystem
+    - 內核時鐘子系統
+- CPU/Task time and stats accounting
+    - CPU/進程的時間及狀態統計
+- RCU Subsystem
+    - RCU(Read-Copy Update)子系統.在讀多寫少的情況下,這是一個高性能的鎖機制,對於被RCU保護的共享數據結構,讀者不需要獲得任何鎖就可以訪問它(速度非常快),但寫者在訪問它時首先拷貝一個副本,然後對副本進行修改,最後使用一個回調機制在適當的時機把指向原來數據的指針重新指向新的被修改的數據,速度非常慢.RCU只適用於讀多寫少的情況:如網絡路由表的查詢更新,設備狀態表的維護,數據結構的延遲釋放以及多徑I/O設備的維護等.
+- Kernel .config support
+    - 把內核的配置信息編譯進內核中,以後可以通過scripts/extract-ikconfig腳本從內核鏡像中提取這些信息
+- Kernel log buffer size (16 => 64KB, 17 => 128KB)
+    - 設置內核日志緩衝區的大小: 12(最小值)=4KB,...,16=64KB,17=128KB,18=256KB,...,21(最大值)=2048KB,預設值18
+- Automatically enable NUMA aware memory/task placement
+    - 在NUMA(Non-Uniform Memory Access Architecture)系統上自動啟用進程/內存均衡,也就是自動開啟CONFIG_NUMA_BALANCING特性
+- Memory placement aware NUMA scheduler
+    - 允許自動根據NUMA系統的節點分布狀況進行進程/內存均衡(方法很原始,就是簡單的內存移動).這個選項對UMA系統無效.[提示]UMA系統的例子:(1)只有一顆物理CPU(即使是多核)的電腦,(2)不支持"虛擬NUMA",或"虛擬NUMA"被禁用的虛擬機(即使所在的物理機是NUMA系統)
+- Control Group support
+    - 是一種進程管理機制,可以針對一組進程進行系統資源的分配和管理,可用於Cpusets,CFS(完全公平調度器),內存管理等子系統.此外,systemd也依賴於它
+- Checkpoint/restore support
+    - 在內核中添加"檢查點/恢復"支持.也就是添加一些輔助的代碼用於設置進程的text, data, heap 段,並且在/proc 文件系統中添加一些額外的條目.主要用於調試目的.不確定的選"N"
+- Namespaces support
+    - 命名空間支持.用於支持基於容器的輕量級虛擬化技術
+- Automatic process group scheduling
+    - 每個TTY動態地創建任務分組(cgroup),這樣就可以降低高負載情況下的桌面延遲.也就是傳說中的桌面" 雞血補丁 ",桌面用戶建議開啟.但服務器建議關閉.
+- Enable deprecated sysfs features to support old userspace tools
+    - 為了兼容舊版本的應用程序而保留過時的sysfs特性.僅當在使用2008年以前的發行版時才需要開啟,2009年之後的發行版中必須關閉.此外,使用udev或systemd的系統也必須關閉.
+- Kernel->user space relay support (formerly relayfs)
+    - 在某些文件系統(比如debugfs)中提供中繼(relay)支持(從內核空間向用戶空間傳遞大批量數據).主要用於調試內核
+- Initial RAM filesystem and RAM disk (initramfs/initrd) support
+    - 初始內存文件系統( initramfs ,2.6以上內核的新機制,使用cpio格式,佔據的內存隨數據的增減自動增減)與初始內存盤( initrd ,2.4以前內核遺留的老機制,使用loop設備,佔據一塊固定的內存,需要額外開啟CONFIG_BLK_DEV_RAM選項才生效)支持,一般通過lilo/grub的initrd指令加載
+    - Initramfs source file(s)
+        - 如果你想將initramfs鏡像直接嵌入內核 (比如嵌入式環境或者想使用EFI stub kernel),而不是通過lilo/grub這樣的引導管理器加載,可以使用此選項,否則請保持空白.這個選項指明用來製作initramfs鏡像的原料,可以是一個.cpio文件,或一個Initramfs虛根目錄(其下包含"bin,dev,etc,lib,proc,sys"等子目錄),或一個描述文件
+- Optimize for size
+    - 編譯時優化內核尺寸(使用GCC的"-Os"而不是"-O2"參數編譯),這會得到更小的內核,但是運行速度可能會更慢.主要用於嵌入式環境.
+- Configure standard kernel features (expert users)
+    - 配置標準的內核特性(僅供專家使用).這個選項允許你改變內核的"標準"特性(比如用於需要"非標準"內核的特定環境中),僅在你確實明白自己在幹什麼的時候才開啟.
+- Embedded system
+    - 如果你是為嵌入式系統編譯內核,可以開啟此選項,這樣一些高級選項就會顯示出來.單獨選中此項本身對內核並無任何改變.
+- Kernel Performance Events And Counters
+    - 性能相關的事件和計數器支持(既有硬件的支持也有軟件的支持).大多數現代CPU都會通過性能計數寄存器對特定類型的硬件事件(指令執行,緩存未命中,分支預測失敗)進行計數,同時又絲毫不會減慢內核和應用程序的運行速度.這些寄存器還會在某些事件計數到達特定的閾值時觸發中斷,從而可以對代碼進行性能分析. Linux Performance Event 子系統對上述特性進行了抽象,提供了針對每個進程和每個CPU的計數器,並可以被tools/perf/ 目錄中的"perf"工具使用.
+- Disable heap randomization
+    - 禁用堆隨機化(heap randomization)功能.堆隨機化可以讓針對堆溢出的攻擊變得困難,但是不兼容那些古董級的二進製程序(2000年以前).如果你不需要使用這些古董程序,那麼選"N".
+- Choose SLAB allocator
+    - 選擇內存分配管理器
+- SLUB per cpu partial cache
+    - 查
+- Profiling support
+    - 添加擴展的性能分析支持,可以被OProfile之類的工具使用.僅用於調試目的.
+- OProfile system profiling
+    - OProfile性能分析工具支持,僅用於調試目的
+    - OProfile multiplexing support (EXPERIMENTAL)
+        - OProfile multiplexing技術支持
+- Kprobes
+    - Kprobes是一個輕量級的內核調試工具,能在內核運行的幾乎任意時間點進行暫停/讀取/修改等操作的調試工具.僅供調試使用.
+- Optimize very unlikely/likely branches
+    - 針對內核中某些"幾乎總是為真"或者"幾乎總是為假"的條件分支判斷使用"asm goto"進行優化(在分支預測失敗時會浪費很多時間在回退上,但是這種情況極少發生).很多內核子系統都支持進行這種優化.建議開啟.
+- Transparent user-space probes (EXPERIMENTAL)
+    - Uprobes與Kprobes類似,但主要用於用戶空間的調試.
+- GCOV-based kernel profiling  --->
+    - 查

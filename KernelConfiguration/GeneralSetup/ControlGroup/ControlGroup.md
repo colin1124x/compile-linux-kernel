@@ -1,0 +1,32 @@
+- Example debug cgroup subsystem
+    - 導出cgroups框架的調試信息,僅用於調試目的
+- Freezer cgroup subsystem
+    - 允許凍結/解凍cgroup內所有進程
+- Device controller for cgroups
+    - 允許為cgroup建立設備白名單,這樣cgroup內的進程將僅允許對白名單中的設備進行mknod/open操作
+- Cpuset support
+    - 允許將CPU和內存進行分組,並指定某些進程只能運行於特定的分組
+    - Include legacy /proc/<pid>/cpuset file
+        - 提供過時的/proc/<pid>/cpuset 文件接口
+- Simple CPU accounting cgroup subsystem
+    - 提供一個簡單的資源控制器(Resource Controller,用於實現一組任務間的資源共享),以監控cgroup內所有進程的總CPU使用量
+- Resource counters
+    - 為cgroup提供獨立於controller資源計數器
+    - Memory Resource Controller for Control Groups
+        - 為cgroup添加內存資源控制器,包含匿名內存和頁面緩存
+        - Memory Resource Controller Swap Extension
+            - 給Memory Resource Controller添加對swap的管理功能.這樣就可以針對每個cgroup限定其使用的mem+swap總量.如果關閉此選項, memory resource controller將僅能限制mem的使用量,而無法對swap進行控制(進程有可能耗盡swap).開啟此功能會對性能有不利影響,並且為了追踪swap的使用也會消耗更多的內存(如果swap的頁面大小是4KB,那麼每1GB的swap需要額外消耗512KB內存),所以在內存較小的系統上不建議開啟.
+            - Memory Resource Controller Swap Extension enabled by default
+                - 如果開啟此選項,那麼將默認開啟CONFIG_MEMCG_SWAP特性,否則將默認關閉
+        - Memory Resource Controller Kernel Memory accounting
+            - 為Memory Resource Controller 添加對內核對象所佔用內存的管理功能.和標準的Memory Resource Controller 對內存的控制不一樣之處在於:這些內核對象所佔用的內存是基於每個內存頁的,並且可以被swap到硬盤.使用這個功能可以確保cgroup中的進程不會單獨耗盡所有內核資源
+    - HugeTLB Resource Controller for Control Groups
+        - 為cgroup添加對HugeTLB頁的資源控制功能.開啟此選項之後,你就可以針對每個cgroup限定其對HugeTLB的使用
+- Enable perf_event per-cpu per-container group (cgroup) monitoring
+    - 將per-cpu模式進行擴展,使其可以監控屬於特定cgroup並運行於特定CPU上的線程
+- Group CPU scheduler
+    - 讓CPU調度程序可以在不同的cgroup之間分配CPU的帶寬.systemd資源控制單元(resource control unit)的CPUShares功能依賴於它.
+- Block IO controller
+    - 通用的塊IO控制器接口,可以用於實現各種不同的控制策略.目前,IOSCHED_CFQ用它來在不同的cgroup之間分配磁盤IO帶寬(需要額外開啟CONFIG_CFQ_GROUP_IOSCHED), block io throttle也會用它來針對特定塊設備限制IO速率上限(需要額外開啟CONFIG_BLK_DEV_THROTTLING)
+    - Enable Block IO controller debugging
+        - 僅用於調試Block IO controller目的

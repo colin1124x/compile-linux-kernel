@@ -23,7 +23,7 @@
     - `audit-libs-devel`
     - `pciutils-devel` 處理PCI
     - `ncurses-devel`
-    - `pesign` make menuconfig 時用作繪畫文字視窗的程式庫
+- `pesign` make menuconfig 時用作繪畫文字視窗的程式庫
 
 ### rpmbuild 說明
 - 建立目錄

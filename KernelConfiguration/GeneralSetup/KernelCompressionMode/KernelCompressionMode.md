@@ -1,0 +1,6 @@
+- Gzip
+- Bzip2
+- LZMA
+- XZ
+- LZO
+- LZ4

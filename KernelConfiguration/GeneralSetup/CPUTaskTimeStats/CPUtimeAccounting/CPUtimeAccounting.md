@@ -1,0 +1,6 @@
+- Simple tick based cputime accounting
+    - 簡單的基於滴答的統計,適用於大多數場合
+- Full dynticks CPU time accounting
+    - 利用上下文跟蹤子系統,通過觀察每一個內核與用戶空間的邊界進行統計.該選項對性能有顯著的不良影響,目前僅用於完全無滴答子系統(CONFIG_NO_HZ_FULL)的調試
+- Fine granularity task level IRQ time accounting
+    - 通過讀取TSC時間戳進行統計,這是統計進程IRQ時間的更細粒度的統計方式,但對性能有些不良影響(特別是在RDTSC指令速度較慢的CPU上)

@@ -1,0 +1,16 @@
+- RCU Implementation (Tree-based hierarchical RCU)
+    - RCU的實現方式
+- Consider userspace as in RCU extended quiescent state
+    - 在內核和用戶邊界設置鉤子函數,將運行在用戶態的CPU從全局RCU狀態機制中移除,這樣就不會在RCU系統中維護此CPU的時鐘滴答.除非你想要幫助開發CONFIG_NO_HZ_FULL模塊,否則不要打開此選項,而且它還會對性能有不利影響
+- Tree-based hierarchical RCU fanout value
+    - 這個選項控制著樹形RCU層次結構的端點數(fanout),以允許RCU子系統在擁有海量CPU的系統上高效工作.這個值必須至少等於CONFIG_NR_CPUS的1/4次方(4次根號).生產系統上應該使用預設值64.僅在你想調試RCU子系統時才需要減小此值
+- Tree-based hierarchical RCU leaf-level fanout value
+    - 這個選項控制著樹形RCU層次結構的葉子層的端點數(leaf-level fanout).對於期望擁有更高能耗比(更節能)的系統,請保持其預設值16.對於擁有成千上萬個CPU的系統來說,應該考慮將其設為最大值(CONFIG_RCU_FANOUT)
+- Disable tree-based hierarchical RCU auto-balancing
+    - 強制按照CONFIG_RCU_FANOUT_LEAF的值,而不是使用自動平衡樹結構來實現RCU子系統.目前僅用於調試目的.未來也許會用於增強NUMA系統的性能.
+- Accelerate last non-dyntick-idle CPU's grace periods
+    - 即使CPU還在忙碌,也允許進入dynticks-idle狀態,並且阻止RCU每4個滴答就喚醒一次該CPU,這樣能夠更有效的使用電力,同時也拉長了RCU grace period的時間,造成性能降低.如果能耗比對你而言非常重要(你想節省每一分電力),並且你不在乎系統性能的降低(CPU喚醒時間增加),可以開啟此選項.台式機和服務器建議關閉此選項
+- Offload RCU callback processing from boot-selected CPUs
+    - 允許提升RCU子系統的實時優先級(包括讀操作與寫操作),以避免RCU操作被阻塞太長時間.如果系統的CPU負載經常很重,或者你需要快速的實時響應系統,那麼就選"Y",否則應該選"N"
+- Build-forced no-CBs CPUs
+    - 在開啟CONFIG_RCU_NOCB_CPU選項的情況下,指定哪些CPU是No-CB CPU,相當於預先設置"rcu_nocbs="內核引導參數

@@ -1,0 +1,4 @@
+- Enable gcov-based kernel profiling
+    - 基於GCC的gcov ( 代碼覆蓋率測試工具)的代碼分析支持,僅用於調試
+    - Profile entire Kernel
+        - 支持對整個內核進行分析.內核體積將會顯著增大,並且運行速度顯著減慢

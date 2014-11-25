@@ -1,0 +1,6 @@
+- Group scheduling for SCHED_OTHER
+    - 公平CPU調度策略,也就是在多個cgroup之間平均分配CPU帶寬
+    - CPU bandwidth provisioning for FAIR_GROUP_SCHED
+        - 允許用戶為運行在CONFIG_FAIR_GROUP_SCHED中的進程定義CPU帶寬限制.對於沒有定義CPU帶寬限制的cgroup而言,可以無限制的使用CPU帶寬
+- Group scheduling for SCHED_RR/FIFO
+    - 允許用戶為cgroup分配實時CPU帶寬,還可以對非特權用戶的實時進程組進行調度

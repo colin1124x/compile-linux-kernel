@@ -90,7 +90,16 @@ $ rpmbuild -bp rpmbuild/SPECS/kernel.spec
 核心設定與編譯
 ```sh
 $ cd rpmbuild/BUILD/kernel-xxxxx/linux-xxxxxx/
+
+# 操作說明 
+# <Y> includes, <N> excludes, <M> modularizes features
+# <Esc><Esc> exit, <?> for Help, </> for Search
 $ make menuconfig
+
+# 在 RPMS/x86_64/ 下產生kernel-xxxx-rpm檔 
+# 注意,有可能會出現 No space left on device (inode用盡)
+# 使用指令 sysctl kernel.msgmni  查看inode數
+# 使用指令 sudo sysctl -w kernel.msgmni=xxx 重新設定
 $ make rpm
 ```
 

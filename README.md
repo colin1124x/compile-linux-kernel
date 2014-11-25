@@ -103,6 +103,7 @@ $ make menuconfig
 # 注意,有可能會出現 No space left on device (inode用盡)
 # 使用指令 sysctl kernel.msgmni  查看inode數
 # 使用指令 sudo sysctl -w kernel.msgmni=xxx 重新設定
+# make help 可以列出有哪些可用指令
 $ make rpm
 ```
 

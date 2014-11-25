@@ -91,9 +91,12 @@ $ rpmbuild -bp rpmbuild/SPECS/kernel.spec
 ```sh
 $ cd rpmbuild/BUILD/kernel-xxxxx/linux-xxxxxx/
 
-# 操作說明 
-# <Y> includes, <N> excludes, <M> modularizes features
+# 操作說明
 # <Esc><Esc> exit, <?> for Help, </> for Search
+# <Y> 啟用,並編入核心, <N> 關閉,且不編入核心, <M> 編譯成模組,需要才載入
+# 選項括號 (<>) 表示可以選 y/n/m
+# 選項關號 ([]) 表示只能選 y/n
+# 選項括號 ({}) 表示只能選 m/n
 $ make menuconfig
 
 # 在 RPMS/x86_64/ 下產生kernel-xxxx-rpm檔 
@@ -116,3 +119,4 @@ $ sudo rpm -e kernel-xxxx
 - [編譯 Linux 核心](http://wiki.debian.org.hk/w/Compile_Linux_kernel)
 - [Linux Rpmbuild 包制作](http://kling.blog.51cto.com/3320545/1239571)
 - [fedora Packaging:ScriptletSnippets](http://fedoraproject.org/wiki/Packaging:ScriptletSnippets)
+- [編譯 Linux 核心成 rpm 套件](http://wiki.debian.org.hk/w/Compile_Linux_kernel_as_rpm)
